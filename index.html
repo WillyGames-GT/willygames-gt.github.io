@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Willy Games – Aplicaciones Android</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wood-dark: #3b1f0a;
+      --wood-mid: #7a4010;
+      --wood-light: #c8934a;
+      --gold: #d4a94a;
+      --gold-light: #f0cc7a;
+      --cream: #f5e9d0;
+      --text-dark: #2a1505;
+      --text-mid: #5a3010;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Crimson Text', Georgia, serif;
+      background-color: var(--wood-dark);
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 60px,
+          rgba(90,48,16,0.08) 60px,
+          rgba(90,48,16,0.08) 61px
+        ),
+        repeating-linear-gradient(
+          180deg,
+          transparent,
+          transparent 4px,
+          rgba(0,0,0,0.04) 4px,
+          rgba(0,0,0,0.04) 5px
+        );
+      color: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      border-bottom: 2px solid var(--wood-mid);
+      background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 100%);
+      animation: fadeDown 1s ease both;
+    }
+
+    header img.logo {
+      max-width: 360px;
+      width: 90%;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+      animation: fadeDown 1.1s ease 0.1s both;
+    }
+
+    header p.tagline {
+      margin-top: 1rem;
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      opacity: 0.85;
+      animation: fadeDown 1.2s ease 0.2s both;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+      background: rgba(0,0,0,0.25);
+      border-bottom: 1px solid var(--wood-mid);
+      animation: fadeDown 1s ease 0.3s both;
+    }
+
+    nav a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--wood-mid);
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    nav a:hover {
+      background: var(--wood-mid);
+      color: var(--cream);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 860px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--wood-mid);
+    }
+
+    section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--cream);
+      opacity: 0.9;
+    }
+
+    /* APP CARDS */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .app-card {
+      background: rgba(200,147,74,0.08);
+      border: 1px solid var(--wood-mid);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .app-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .app-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .app-card p {
+      font-size: 1rem;
+      color: var(--cream);
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    .badge-disponible {
+      display: inline-block;
+      background: rgba(100,180,80,0.2);
+      border: 1px solid #6ab450;
+      color: #90d470;
+      font-size: 0.78rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.8rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-proximamente {
+      display: inline-block;
+      background: rgba(180,140,50,0.2);
+      border: 1px solid var(--wood-light);
+      color: var(--gold-light);
+      font-size: 0.78rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.8rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-playstore {
+      display: inline-block;
+      background: var(--wood-mid);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      border: 1px solid var(--gold);
+      transition: background 0.2s;
+    }
+
+    .btn-playstore:hover { background: var(--wood-light); color: var(--text-dark); }
+
+    /* DONACIÓN */
+    .donation-box {
+      text-align: center;
+      background: rgba(200,147,74,0.07);
+      border: 1px solid var(--wood-mid);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-top: 1rem;
+    }
+
+    .donation-box p {
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-donar {
+      display: inline-block;
+      background: #0070ba;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.7rem 2rem;
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-donar:hover { background: #005fa3; }
+
+    /* CONTACTO */
+    .contact-info {
+      background: rgba(200,147,74,0.07);
+      border: 1px solid var(--wood-mid);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      margin-top: 1rem;
+    }
+
+    .contact-info p { margin-bottom: 0.5rem; }
+
+    .contact-info a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    .contact-info a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--wood-mid);
+      font-size: 0.9rem;
+      color: var(--gold);
+      opacity: 0.6;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.05em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      header img.logo { max-width: 280px; }
+      section h2 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img class="logo" src="logo_willy.png" alt="Willy Games"/>
+    <p class="tagline">Aplicaciones Android hechas con dedicación</p>
+  </header>
+
+  <nav>
+    <a href="#apps">Aplicaciones</a>
+    <a href="#acerca">Acerca de</a>
+    <a href="#donacion">Donación</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section id="apps">
+    <h2>Aplicaciones</h2>
+    <div class="apps-grid">
+
+      <div class="app-card">
+        <h3>Biblia Reina Valera 1909 en Español</h3>
+        <span class="badge-disponible">✓ Disponible</span>
+        <p>Lee y escucha la Biblia completa en audio, en español, con navegación por libro, capítulo y versículo.</p>
+        <a class="btn-playstore" href="#" target="_blank">Ver en Play Store</a>
+      </div>
+
+      <!-- Futuras apps se agregan aquí -->
+
+    </div>
+  </section>
+
+  <section id="acerca">
+    <h2>Acerca de</h2>
+    <p>
+      Soy Willy De León, desarrollador independiente de aplicaciones Android radicado en Guatemala.
+      Creo aplicaciones útiles y de calidad, con el objetivo de servir a las personas.
+      Cada app que publico bajo el nombre <strong style="color:var(--gold-light)">Willy Games</strong> es desarrollada
+      de forma independiente, con dedicación y amor por la tecnología.
+    </p>
+  </section>
+
+  <section id="donacion">
+    <h2>Apoya mi trabajo</h2>
+    <div class="donation-box">
+      <p>
+        Si alguna de mis aplicaciones te ha sido útil y deseas apoyar su desarrollo,
+        puedes hacer una donación voluntaria. ¡Cualquier cantidad es bienvenida y muy apreciada!
+      </p>
+      <!-- Reemplaza TU_EMAIL_PAYPAL con tu correo de PayPal -->
+      <a class="btn-donar"
+         href="https://www.paypal.com/donate/?business=TU_EMAIL_PAYPAL&currency_code=USD"
+         target="_blank">
+        ♥ Donar con PayPal
+      </a>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <div class="contact-info">
+      <p>Desarrollador: <strong style="color:var(--gold-light)">Willy De León</strong></p>
+      <p>Correo: <a href="mailto:pc32mech@gmail.com">pc32mech@gmail.com</a></p>
+      <p>Empresa: Willy Games</p>
+      <p>País: Guatemala</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Willy Games · Willy De León · Guatemala
+  </footer>
+
+</body>
+</html>
